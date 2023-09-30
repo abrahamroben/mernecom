@@ -10,7 +10,6 @@ function Home() {
   const dispatch = useDispatch();
 
   const userId = userInfo?.id;
-  console.log(items);
   useEffect(() => {
     dispatch(getCart(userId));
   }, [userId, dispatch]);

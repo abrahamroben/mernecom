@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     CheckoutContainer,
     Payment,
@@ -13,17 +13,16 @@ import axios from "axios";
 
 export default function Checkout() {
     const cart = useSelector((state) => state.cart);
-
     const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const handleClick = () => {
-        console.log(cart)
+        console.log(cart);
         let cartId = null;
         if (cart) {
             if (cart.cart) {
                 if (cart.cart._id) {
                     cartId = cart.cart._id;
-                    console.log(cartId)
+                    console.log(cartId);
                 }
             }
         }
@@ -34,7 +33,7 @@ export default function Checkout() {
             if (auth.userInfo) {
                 if (auth.userInfo.id) {
                     userId = auth.userInfo.id;
-                    console.log(userId)
+                    console.log(userId);
                 }
             }
         }
@@ -82,6 +81,7 @@ export default function Checkout() {
     const handleCreateOrder = async(cartId, userId, amountValue) => {
         const data = { cartId, userId };
         const response = await axios.post("/api/orders", data);
+        console.log(response);
         const orderID = await response.data.id;
         return orderID;
     };
@@ -124,7 +124,7 @@ export default function Checkout() {
         Total >
         <
         h2 > Order Total < /h2> <p> $ {amountValue} </p > { " " } <
-        /Total> <
+        /Total>{" "} <
         Payment >
         <
         p > Choose below payment methods < /p>{" "} <
